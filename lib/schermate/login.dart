@@ -4,11 +4,11 @@ class Loginscreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      //return material app or scaffold? cosa cambia
+      debugShowCheckedModeBanner: false,
       title: 'Login',
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Login'),
+          title: Text('Ciao!'),
           centerTitle: true,
           backgroundColor: Colors.pink[400],
         ),
@@ -26,29 +26,63 @@ class Loginscreen extends StatelessWidget {
             children: [
               Container(
                 width: 80,
-                height: 200,
-                margin: EdgeInsets.all(30),
+                height: 300,
+                margin: EdgeInsets.all(20),
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.all(Radius.circular(15))),
-                child: Padding(
-                  padding: EdgeInsets.all(30),
-                  child: TextField(
-                    decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(15))),
-                        labelText: 'Username'),
-                    cursorColor: Colors.black87,
-                  ),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.all(25),
+                      child: TextField(
+                        decoration: InputDecoration(
+                            contentPadding: EdgeInsets.all(10),
+                            border: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(15)),
+                            ),
+                            labelText: 'Username'),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(25),
+                      child: TextField(
+                        decoration: InputDecoration(
+                            suffixIcon: IconButton(
+                                onPressed: () =>
+                                    print('cliccato mostra password'),
+                                icon: Icon(Icons.visibility)),
+                            contentPadding: EdgeInsets.all(10),
+                            border: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(15)),
+                            ),
+                            labelText: 'Password'),
+                        obscureText: true,
+                      ),
+                    ),
+                    ElevatedButton(
+                      onPressed: () => 'click',
+                      child: Text('Login'),
+                      style: ElevatedButton.styleFrom(
+                          primary: Colors.pink[400],
+                          shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(15)))),
+                    ),
+                    Center(
+                      child: GestureDetector(
+                        onTap: () => print(
+                            'cliccato'), //aggiungere navigate a pagina register
+                        child: Text(
+                          'Gia registrato?',
+                          style: TextStyle(color: Colors.blue[700]),
+                        ),
+                      ),
+                    )
+                  ],
                 ),
-                /*child: TextField(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    contentPadding: EdgeInsets.all(10),
-                    labelText: 'Username',
-                  ),
-                ),*/
               ),
             ],
           ),
