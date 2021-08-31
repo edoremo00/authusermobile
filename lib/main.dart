@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:testlogin/schermate/Loginstateful.dart';
+import 'package:testlogin/schermate/Registerstateful.dart';
 
 void main() {
   runApp(MyApp());
@@ -11,8 +12,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(),
-      home: Loginscreen(),
+      routes: {
+        'Register': (context) => Registerstatteful(),
+        '/': (context) => Loginscreen()
+      },
+      //theme: ThemeData(),
+      //home: Loginscreen(),
+      initialRoute: '/',
     );
   }
 }
