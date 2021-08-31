@@ -46,10 +46,12 @@ class _LoginscreenState extends State<Loginscreen> {
                       padding: EdgeInsets.all(25),
                       child: TextField(
                         decoration: InputDecoration(
+                            prefixIcon: Icon(Icons.person),
                             contentPadding: EdgeInsets.all(10),
                             border: OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(15)),
+                              //borderSide: BorderSide(color: Colors.pink) DOVREBBE SERVIRE PER CAMBIARE COLORE BORDO
                             ),
                             labelText: 'Username'),
                       ),
@@ -77,21 +79,29 @@ class _LoginscreenState extends State<Loginscreen> {
                       ),
                     ),
                     ElevatedButton(
-                      onPressed: () => 'click',
+                      onPressed: () => print('click'),
                       child: Text('Login'),
                       style: ElevatedButton.styleFrom(
                           primary: Colors.pink[400],
+                          fixedSize: Size(100, 40),
                           shape: RoundedRectangleBorder(
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(15)))),
+                                  BorderRadius.all(Radius.circular(15))),
+                          padding: EdgeInsets.all(10)),
+                    ),
+                    SizedBox(
+                      height: 10,
                     ),
                     Center(
                       child: GestureDetector(
-                        onTap: () => print(
-                            'cliccato'), //aggiungere navigate a pagina register
+                        onTap: () => {
+                          Navigator.pushNamed(context, 'Register')
+                        }, //aggiungere navigate a pagina register
                         child: Text(
                           'Gia registrato?',
-                          style: TextStyle(color: Colors.blue[700]),
+                          style: TextStyle(
+                              color: Colors.blue[700],
+                              fontWeight: FontWeight.w600),
                         ),
                       ),
                     )
