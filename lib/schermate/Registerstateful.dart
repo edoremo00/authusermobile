@@ -27,9 +27,10 @@ class _RegisterstattefulState extends State<Registerstatteful> {
             centerTitle: true,
           ),
         ),
-        /*SliverList(//da capire perchè dà problemi
-          delegate: ,
-          ),*/
+        SliverList(
+          //da capire perchè dà problemi
+          delegate: SliverChildListDelegate([]),
+        ),
         //),
       ],
     );
