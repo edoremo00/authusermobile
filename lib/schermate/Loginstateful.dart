@@ -9,6 +9,16 @@ class Loginscreen extends StatefulWidget {
 
 class _LoginscreenState extends State<Loginscreen> {
   bool passwordobscured = true;
+  final usernameController = TextEditingController();
+  @override
+  void initState() {
+    super.initState();
+
+    usernameController.addListener(() => setState(
+        () {})); //questa funzione rimane in ascolto del mio controller username e vede se ci sono cambiamenti
+  }
+
+  //String testousername=usernameController.text.toString(); farlo nel metodo initstate. ancora non è stato instanziato quindi non è possibile accedervi
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -45,8 +55,26 @@ class _LoginscreenState extends State<Loginscreen> {
                     Padding(
                       padding: EdgeInsets.all(25),
                       child: TextField(
+                        controller: usernameController,
+                        textInputAction: TextInputAction.next,
+                        //fa venire fuori nella tastiera tasto in basso per continuare o uscire da campo di testo
                         decoration: InputDecoration(
-                            prefixIcon: Icon(Icons.person),
+                            prefixIcon: Icon(
+                              Icons.person,
+                              color: Colors.black87,
+                            ),
+                            suffixIcon: usernameController.text
+                                    .isEmpty //campo suffix icon dipende da valore input--> se vuoto nessuna icona senno icona X. questo è un cambiamento nel controller
+                                //viene quindi eseguito il setstate che aggiorna la ui.
+                                ? Container(
+                                    width: 0,
+                                  )
+                                : IconButton(
+                                    onPressed: () => usernameController.clear(),
+                                    icon: Icon(
+                                      Icons.close,
+                                      color: Colors.red[700],
+                                    )),
                             contentPadding: EdgeInsets.all(10),
                             border: OutlineInputBorder(
                               borderRadius:
@@ -59,16 +87,19 @@ class _LoginscreenState extends State<Loginscreen> {
                     Padding(
                       padding: EdgeInsets.all(25),
                       child: TextField(
+                        textInputAction: TextInputAction.done,
                         decoration: InputDecoration(
                             suffixIcon: IconButton(
-                                onPressed: () {
-                                  setState(() {
-                                    passwordobscured = !passwordobscured;
-                                  });
-                                },
-                                icon: Icon(passwordobscured
-                                    ? Icons.visibility
-                                    : Icons.visibility_off)),
+                              onPressed: () {
+                                setState(() {
+                                  passwordobscured = !passwordobscured;
+                                });
+                              },
+                              icon: Icon(passwordobscured
+                                  ? Icons.visibility
+                                  : Icons.visibility_off),
+                              color: Colors.black87,
+                            ),
                             contentPadding: EdgeInsets.all(10),
                             border: OutlineInputBorder(
                               borderRadius:
@@ -79,7 +110,7 @@ class _LoginscreenState extends State<Loginscreen> {
                       ),
                     ),
                     ElevatedButton(
-                      onPressed: () => print('click'),
+                      onPressed: () => print(usernameController.text.isEmpty),
                       child: Text('Login'),
                       style: ElevatedButton.styleFrom(
                           primary: Colors.pink[400],
