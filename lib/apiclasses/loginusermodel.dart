@@ -16,7 +16,8 @@ class Login {
 
   void createuser(Login log) async {
     final response = await http.post(
-      Uri.parse('http://10.0.2.2:44322/api/Auth'),
+      Uri.parse(
+          ''), //127.0.0.1:  https://localhost:44322/api/Auth/login--> usa questo se esegui app da browser
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
