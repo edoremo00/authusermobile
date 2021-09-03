@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:testlogin/apiclasses/loginusermodel.dart';
 
 class Loginscreen extends StatefulWidget {
   Loginscreen({Key? key}) : super(key: key);
@@ -10,17 +11,21 @@ class Loginscreen extends StatefulWidget {
 class _LoginscreenState extends State<Loginscreen> {
   bool passwordobscured = true;
   final usernameController = TextEditingController();
+  final passwordcontroller = TextEditingController();
+
   @override
   void initState() {
     super.initState();
 
-    usernameController.addListener(() => setState(
-        () {})); //questa funzione rimane in ascolto del mio controller username e vede se ci sono cambiamenti
+    usernameController.addListener(() => setState(() {}));
+    //questa funzione rimane in ascolto del mio controller username e vede se ci sono cambiamenti
   }
 
   //String testousername=usernameController.text.toString(); farlo nel metodo initstate. ancora non è stato instanziato quindi non è possibile accedervi
   @override
   Widget build(BuildContext context) {
+    Login log = Login(
+        password: passwordcontroller.text, username: usernameController.text);
     return MaterialApp(
       routes: {}, //fare pagina register e usare navigator nell'on tap del gesture detector
       debugShowCheckedModeBanner: false,
@@ -87,6 +92,7 @@ class _LoginscreenState extends State<Loginscreen> {
                     Padding(
                       padding: EdgeInsets.all(25),
                       child: TextField(
+                        controller: passwordcontroller,
                         textInputAction: TextInputAction.done,
                         decoration: InputDecoration(
                             suffixIcon: IconButton(
@@ -110,7 +116,7 @@ class _LoginscreenState extends State<Loginscreen> {
                       ),
                     ),
                     ElevatedButton(
-                      onPressed: () => print(usernameController.text.isEmpty),
+                      onPressed: () => {log.createuser(log)},
                       child: Text('Login'),
                       style: ElevatedButton.styleFrom(
                           primary: Colors.pink[400],
@@ -129,7 +135,7 @@ class _LoginscreenState extends State<Loginscreen> {
                           Navigator.pushNamed(context, 'Register')
                         }, //aggiungere navigate a pagina register
                         child: Text(
-                          'Gia registrato?',
+                          'Nuovo Utente?',
                           style: TextStyle(
                               color: Colors.blue[700],
                               fontWeight: FontWeight.w600),
