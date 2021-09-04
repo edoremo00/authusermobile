@@ -18,7 +18,6 @@ class _LoginscreenState extends State<Loginscreen> {
     super.initState();
 
     usernameController.addListener(() => setState(() {}));
-    passwordcontroller.addListener(() => setState(() {}));
     //questa funzione rimane in ascolto del mio controller username e vede se ci sono cambiamenti
   }
 
