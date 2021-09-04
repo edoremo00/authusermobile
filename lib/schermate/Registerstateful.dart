@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:testlogin/schermate/Loginstateful.dart';
+import 'package:testlogin/apiclasses/loginusermodel.dart';
 import 'package:testlogin/reusablewidgets/Textfieldregister.dart';
 
 class Registerstatteful extends StatefulWidget {
@@ -10,8 +10,18 @@ class Registerstatteful extends StatefulWidget {
 }
 
 class _RegisterstattefulState extends State<Registerstatteful> {
+  final usernamecontroller = TextEditingController();
+  final emailcontroller = TextEditingController();
+  final passwordcontroller = TextEditingController();
+  final confirmpasswordcontroller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
+    Register reg = Register(
+        username: usernamecontroller.text,
+        email: emailcontroller.text,
+        password: passwordcontroller.text,
+        confirmpassword: confirmpasswordcontroller.text);
     /*return CustomScrollView(
       slivers: [
         SliverAppBar(
@@ -66,6 +76,7 @@ class _RegisterstattefulState extends State<Registerstatteful> {
                   Textfieldregister(
                       labeltext: 'Username',
                       prefixicon: Icon(Icons.person),
+                      textEditingController: usernamecontroller,
                       textInputAction: TextInputAction.next),
                   SizedBox(
                     height: 60,
@@ -74,6 +85,7 @@ class _RegisterstattefulState extends State<Registerstatteful> {
                     labeltext: 'E-mail',
                     prefixicon: Icon(Icons.email),
                     textInputType: TextInputType.emailAddress,
+                    textEditingController: emailcontroller,
                     textInputAction: TextInputAction.next,
                   ),
                   SizedBox(
@@ -84,6 +96,7 @@ class _RegisterstattefulState extends State<Registerstatteful> {
                     prefixicon: Icon(Icons.lock),
                     obscuretext: true,
                     textInputAction: TextInputAction.next,
+                    textEditingController: passwordcontroller,
                   ),
                   SizedBox(
                     height: 60,
@@ -93,12 +106,13 @@ class _RegisterstattefulState extends State<Registerstatteful> {
                     prefixicon: Icon(Icons.lock),
                     obscuretext: true,
                     textInputAction: TextInputAction.done,
+                    textEditingController: confirmpasswordcontroller,
                   ),
                   SizedBox(
                     height: 80,
                   ),
                   ElevatedButton(
-                    onPressed: () => {},
+                    onPressed: () => {reg.registeruser(reg)},
                     child: Text('Registrati'),
                     style: ElevatedButton.styleFrom(
                         fixedSize: Size(140, 70),
