@@ -18,6 +18,7 @@ class _LoginscreenState extends State<Loginscreen> {
     super.initState();
 
     usernameController.addListener(() => setState(() {}));
+    passwordcontroller.addListener(() => setState(() {}));
     //questa funzione rimane in ascolto del mio controller username e vede se ci sono cambiamenti
   }
 
@@ -90,7 +91,8 @@ class _LoginscreenState extends State<Loginscreen> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.all(25),
+                      padding: EdgeInsets.only(
+                          top: 5, left: 20, right: 20, bottom: 20),
                       child: TextField(
                         controller: passwordcontroller,
                         textInputAction: TextInputAction.done,
