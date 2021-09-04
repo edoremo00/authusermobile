@@ -91,7 +91,7 @@ class _LoginscreenState extends State<Loginscreen> {
                     ),
                     Padding(
                       padding: EdgeInsets.only(
-                          top: 5, left: 20, right: 20, bottom: 20),
+                          top: 5, left: 20, right: 20, bottom: 30),
                       child: TextField(
                         controller: passwordcontroller,
                         textInputAction: TextInputAction.done,
@@ -121,14 +121,14 @@ class _LoginscreenState extends State<Loginscreen> {
                       child: Text('Login'),
                       style: ElevatedButton.styleFrom(
                           primary: Colors.pink[400],
-                          fixedSize: Size(100, 40),
+                          fixedSize: Size(200, 50),
                           shape: RoundedRectangleBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(15))),
                           padding: EdgeInsets.all(10)),
                     ),
                     SizedBox(
-                      height: 10,
+                      height: 20,
                     ),
                     Center(
                       child: GestureDetector(
