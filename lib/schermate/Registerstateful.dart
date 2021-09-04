@@ -57,55 +57,39 @@ class _RegisterstattefulState extends State<Registerstatteful> {
         children: [
           SingleChildScrollView(
             //scrollDirection: Axis.vertical,
-            padding: EdgeInsets.all(40),
+            padding: EdgeInsets.only(top: 60, left: 30, right: 30, bottom: 30),
             child: Column(
-              //crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                /*Textfieldregister(   CAPIRE COME USARE MIO WIDGET CUSTOM
-                    labeltext: 'pippo',
-                  )*/
-                TextField(
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(15))),
-                      labelText: 'Username',
-                      prefixIcon: Icon(Icons.person)),
+                Textfieldregister(
+                    labeltext: 'Username',
+                    prefixicon: Icon(Icons.person),
+                    textInputAction: TextInputAction.next),
+                SizedBox(
+                  height: 60,
+                ),
+                Textfieldregister(
+                  labeltext: 'E-mail',
+                  prefixicon: Icon(Icons.email),
+                  textInputType: TextInputType.emailAddress,
+                  textInputAction: TextInputAction.next,
                 ),
                 SizedBox(
-                  height: 30,
+                  height: 60,
                 ),
-                TextField(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(15))),
-                    labelText: 'Email',
-                    prefixIcon: Icon(Icons.email),
-                  ),
-                  keyboardType: TextInputType.emailAddress,
+                Textfieldregister(
+                  labeltext: 'Password',
+                  prefixicon: Icon(Icons.lock),
+                  obscuretext: true,
+                  textInputAction: TextInputAction.next,
                 ),
                 SizedBox(
-                  height: 30,
+                  height: 60,
                 ),
-                TextField(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(15))),
-                    labelText: 'Password',
-                    prefixIcon: Icon(Icons.android),
-                  ),
-                  keyboardType: TextInputType.emailAddress,
-                ),
-                SizedBox(
-                  height: 30,
-                ),
-                TextField(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(15))),
-                    labelText: 'Confirm password',
-                    prefixIcon: Icon(Icons.android),
-                  ),
-                  keyboardType: TextInputType.emailAddress,
+                Textfieldregister(
+                  labeltext: 'Confirm password',
+                  prefixicon: Icon(Icons.lock),
+                  obscuretext: true,
+                  textInputAction: TextInputAction.done,
                 ),
                 SizedBox(
                   height: 80,
