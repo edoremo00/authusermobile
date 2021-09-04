@@ -3,20 +3,25 @@ import 'package:flutter/material.dart';
 class Textfieldregister extends StatefulWidget {
   //Textfieldregister({Key? key}) : super(key: key);
   final String labeltext;
-  final Icon? iconalabel;
+  final Icon? suffixicon;
+  final Icon? prefixicon;
+  final TextInputType? textInputType;
+  final bool obscuretext;
+  final TextInputAction? textInputAction;
 
-  Textfieldregister(
-      {this.iconalabel,
-      required this.labeltext}); //graffe indicano che i parametri sono opzionali
+  const Textfieldregister(
+      {this.suffixicon,
+      required this.labeltext,
+      this.prefixicon,
+      this.textInputType,
+      this.obscuretext = false,
+      this.textInputAction}); //graffe indicano che i parametri sono opzionali
 
   @override
   _TextfieldregisterState createState() => _TextfieldregisterState();
 }
 
 class _TextfieldregisterState extends State<Textfieldregister> {
-  get labeltext =>
-      null; // se metto null vedo widget sennò problema di overflow bottom
-
   @override
   void initState() {
     super.initState();
@@ -26,10 +31,16 @@ class _TextfieldregisterState extends State<Textfieldregister> {
   Widget build(BuildContext context) {
     return TextField(
       decoration: InputDecoration(
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(15)),
-          ),
-          labelText: this.labeltext),
+        labelText: widget.labeltext,
+        suffixIcon: widget.suffixicon,
+        prefixIcon: widget.prefixicon,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(15)),
+        ),
+      ),
+      keyboardType: widget.textInputType,
+      obscureText: widget.obscuretext,
+      textInputAction: widget.textInputAction,
     );
   }
 }
