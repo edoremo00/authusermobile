@@ -8,6 +8,7 @@ class Textfieldregister extends StatefulWidget {
   final TextInputType? textInputType;
   final bool obscuretext;
   final TextInputAction? textInputAction;
+  final TextEditingController textEditingController;
 
   const Textfieldregister(
       {this.suffixicon,
@@ -15,7 +16,8 @@ class Textfieldregister extends StatefulWidget {
       this.prefixicon,
       this.textInputType,
       this.obscuretext = false,
-      this.textInputAction}); //graffe indicano che i parametri sono opzionali
+      this.textInputAction,
+      required this.textEditingController}); //graffe indicano che i parametri sono opzionali
 
   @override
   _TextfieldregisterState createState() => _TextfieldregisterState();
@@ -30,6 +32,7 @@ class _TextfieldregisterState extends State<Textfieldregister> {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      controller: widget.textEditingController,
       decoration: InputDecoration(
         labelText: widget.labeltext,
         suffixIcon: widget.suffixicon,
