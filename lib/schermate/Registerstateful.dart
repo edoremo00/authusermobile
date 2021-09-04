@@ -55,55 +55,60 @@ class _RegisterstattefulState extends State<Registerstatteful> {
       body: Column(
         //mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          SingleChildScrollView(
-            //scrollDirection: Axis.vertical,
-            padding: EdgeInsets.only(top: 60, left: 30, right: 30, bottom: 30),
-            child: Column(
-              children: [
-                Textfieldregister(
-                    labeltext: 'Username',
-                    prefixicon: Icon(Icons.person),
-                    textInputAction: TextInputAction.next),
-                SizedBox(
-                  height: 60,
-                ),
-                Textfieldregister(
-                  labeltext: 'E-mail',
-                  prefixicon: Icon(Icons.email),
-                  textInputType: TextInputType.emailAddress,
-                  textInputAction: TextInputAction.next,
-                ),
-                SizedBox(
-                  height: 60,
-                ),
-                Textfieldregister(
-                  labeltext: 'Password',
-                  prefixicon: Icon(Icons.lock),
-                  obscuretext: true,
-                  textInputAction: TextInputAction.next,
-                ),
-                SizedBox(
-                  height: 60,
-                ),
-                Textfieldregister(
-                  labeltext: 'Confirm password',
-                  prefixicon: Icon(Icons.lock),
-                  obscuretext: true,
-                  textInputAction: TextInputAction.done,
-                ),
-                SizedBox(
-                  height: 80,
-                ),
-                ElevatedButton(
-                  onPressed: () => {},
-                  child: Text('Registrati'),
-                  style: ElevatedButton.styleFrom(
-                      fixedSize: Size(140, 70),
-                      primary: Colors.pink[400],
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(15)))),
-                )
-              ],
+          Expanded(
+            // wrappare expanded è fondamentale, senza non ho lo scrolling della pagina
+            child: SingleChildScrollView(
+              //scrollDirection: Axis.vertical,
+              padding:
+                  EdgeInsets.only(top: 60, left: 30, right: 30, bottom: 30),
+              child: Column(
+                children: [
+                  Textfieldregister(
+                      labeltext: 'Username',
+                      prefixicon: Icon(Icons.person),
+                      textInputAction: TextInputAction.next),
+                  SizedBox(
+                    height: 60,
+                  ),
+                  Textfieldregister(
+                    labeltext: 'E-mail',
+                    prefixicon: Icon(Icons.email),
+                    textInputType: TextInputType.emailAddress,
+                    textInputAction: TextInputAction.next,
+                  ),
+                  SizedBox(
+                    height: 60,
+                  ),
+                  Textfieldregister(
+                    labeltext: 'Password',
+                    prefixicon: Icon(Icons.lock),
+                    obscuretext: true,
+                    textInputAction: TextInputAction.next,
+                  ),
+                  SizedBox(
+                    height: 60,
+                  ),
+                  Textfieldregister(
+                    labeltext: 'Confirm password',
+                    prefixicon: Icon(Icons.lock),
+                    obscuretext: true,
+                    textInputAction: TextInputAction.done,
+                  ),
+                  SizedBox(
+                    height: 80,
+                  ),
+                  ElevatedButton(
+                    onPressed: () => {},
+                    child: Text('Registrati'),
+                    style: ElevatedButton.styleFrom(
+                        fixedSize: Size(140, 70),
+                        primary: Colors.pink[400],
+                        shape: RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(15)))),
+                  )
+                ],
+              ),
             ),
           )
         ],
