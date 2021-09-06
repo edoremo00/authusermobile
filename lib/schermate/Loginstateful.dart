@@ -31,34 +31,55 @@ class _LoginscreenState extends State<Loginscreen> {
       routes: {}, //fare pagina register e usare navigator nell'on tap del gesture detector
       debugShowCheckedModeBanner: false,
       title: 'Login',
+      theme: ThemeData(
+        scaffoldBackgroundColor: Colors.transparent,
+      ),
       home: Scaffold(
         drawer: Menu(),
         appBar: AppBar(
-          title: Text('Ciao!'),
-          centerTitle: true,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+              bottom: Radius.circular(48),
+            ),
+          ),
+          toolbarHeight: 70,
           backgroundColor: Colors.pink[400],
         ),
+        resizeToAvoidBottomInset: true,
         body: Container(
+          margin: EdgeInsets.only(top: 3),
           decoration: BoxDecoration(
+              borderRadius:
+                  BorderRadius.vertical(top: Radius.elliptical(30, 30)),
               gradient: LinearGradient(
-            colors: [
-              Color.fromARGB(255, 52, 156, 225),
-              Color.fromARGB(255, 142, 69, 173)
-            ],
-          )),
+                colors: [
+                  Color.fromARGB(255, 52, 156, 225),
+                  Color.fromARGB(255, 142, 69, 173)
+                ],
+              )),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Container(
                 width: 80,
-                height: 300,
+                height: 340,
                 margin: EdgeInsets.all(20),
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.all(Radius.circular(15))),
                 child: Column(
                   children: [
+                    Padding(
+                      padding: EdgeInsets.only(top: 20),
+                      child: Text(
+                        'Login',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ),
                     Padding(
                       padding: EdgeInsets.all(25),
                       child: TextField(
