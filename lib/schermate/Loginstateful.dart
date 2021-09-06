@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:testlogin/apiclasses/loginusermodel.dart';
+import 'package:testlogin/reusablewidgets/menu.dart';
 
 class Loginscreen extends StatefulWidget {
   Loginscreen({Key? key}) : super(key: key);
@@ -31,6 +32,7 @@ class _LoginscreenState extends State<Loginscreen> {
       debugShowCheckedModeBanner: false,
       title: 'Login',
       home: Scaffold(
+        drawer: Menu(),
         appBar: AppBar(
           title: Text('Ciao!'),
           centerTitle: true,
@@ -77,7 +79,7 @@ class _LoginscreenState extends State<Loginscreen> {
                                 : IconButton(
                                     onPressed: () => usernameController.clear(),
                                     icon: Icon(
-                                      Icons.close,
+                                      Icons.close_rounded,
                                       color: Colors.red[700],
                                     )),
                             contentPadding: EdgeInsets.all(10),
@@ -103,7 +105,7 @@ class _LoginscreenState extends State<Loginscreen> {
                                 });
                               },
                               icon: Icon(passwordobscured
-                                  ? Icons.visibility
+                                  ? Icons.visibility_sharp
                                   : Icons.visibility_off),
                               color: Colors.black87,
                             ),
