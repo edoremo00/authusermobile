@@ -16,8 +16,23 @@ class _MenuState extends State<Menu> {
         color: Colors.pink[200],
         child: ListView(
           children: [
+            Container(
+              padding: EdgeInsets.only(left: 10),
+              alignment: Alignment.topLeft,
+              height: 100,
+              child: Icon(
+                Icons.android_outlined,
+              ),
+              decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                colors: [
+                  Color.fromARGB(255, 52, 156, 225),
+                  Color.fromARGB(255, 142, 69, 173)
+                ],
+              )),
+            ),
             SizedBox(
-              height: 48,
+              height: 20,
             ),
             menuitems(
                 coloreicona: Colors.black87,
@@ -31,7 +46,10 @@ class _MenuState extends State<Menu> {
                 coloreicona: Colors.black87,
                 icona: Icons.person_outline,
                 testo: 'Gestione Profilo',
-                funzioneontap: () => {}),
+                funzioneontap: () => {
+                      Navigator.pushNamed(context,
+                          'gestioneprofilo') //BUG NON FUNZIONA NAVIGAZIONE
+                    }),
             SizedBox(
               height: 48,
             ),
