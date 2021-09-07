@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:testlogin/apiclasses/loginusermodel.dart';
 import 'package:testlogin/reusablewidgets/menu.dart';
+import 'package:testlogin/schermate/gestioneprofilo.dart';
 
 class Loginscreen extends StatefulWidget {
   Loginscreen({Key? key}) : super(key: key);
@@ -28,7 +29,9 @@ class _LoginscreenState extends State<Loginscreen> {
     Login log = Login(
         password: passwordcontroller.text, username: usernameController.text);
     return MaterialApp(
-      routes: {}, //fare pagina register e usare navigator nell'on tap del gesture detector
+      routes: {
+        'gestioneprofilo': (context) => Gestionprofilo()
+      }, //fare pagina register e usare navigator nell'on tap del gesture detector
       debugShowCheckedModeBanner: false,
       title: 'Login',
       theme: ThemeData(
