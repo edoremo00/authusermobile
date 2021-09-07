@@ -2,6 +2,12 @@
 
 A new Flutter project.
 
+NOTE
+ menu è riutilizzabile. ho usato una funzione per farlo
+ menureusable è riutilizzabile ho usato una classe per farlo
+
+ entrambi questi approcci portano allo stesso risultato
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
