@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+//APPROCIO CREAZIONE VOCI MENU DRAWER TRAMITE FUNZIONE
 class Menu extends StatefulWidget {
   Menu({Key? key}) : super(key: key);
 
@@ -86,33 +87,33 @@ class _MenuState extends State<Menu> {
       ),
     );
   }
+}
 
-  Widget menuitems(
-      {String testo = 'default',
-      Color coloretesto = Colors.black87,
-      double grandezzatesto = 16,
-      FontWeight spessoretesto = FontWeight.bold,
-      IconData? icona,
-      Color? coloreicona,
-      Color? coloretile,
-      VoidCallback? funzioneontap}) {
-    return ListTile(
-      minLeadingWidth: 2,
-      contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-      tileColor: coloretile,
-      leading: Icon(
-        icona,
-        color: coloreicona,
+Widget menuitems(
+    {String testo = 'default',
+    Color coloretesto = Colors.black87,
+    double grandezzatesto = 16,
+    FontWeight spessoretesto = FontWeight.bold,
+    IconData? icona,
+    Color? coloreicona,
+    Color? coloretile,
+    VoidCallback? funzioneontap}) {
+  return ListTile(
+    minLeadingWidth: 2,
+    contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+    tileColor: coloretile,
+    leading: Icon(
+      icona,
+      color: coloreicona,
+    ),
+    title: Text(
+      testo,
+      style: TextStyle(
+        color: coloretesto,
+        fontSize: grandezzatesto,
+        fontWeight: spessoretesto,
       ),
-      title: Text(
-        testo,
-        style: TextStyle(
-          color: coloretesto,
-          fontSize: grandezzatesto,
-          fontWeight: spessoretesto,
-        ),
-      ),
-      onTap: funzioneontap,
-    );
-  }
+    ),
+    onTap: funzioneontap,
+  );
 }
