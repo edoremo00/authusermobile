@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:testlogin/reusablewidgets/menu.dart';
+import 'package:testlogin/model/user.dart';
+import 'package:testlogin/model/userdata.dart';
 import 'package:testlogin/reusablewidgets/menureusable.dart';
+import 'package:testlogin/schermate/profilewidget.dart';
 
 class Gestionprofilo extends StatefulWidget {
   Gestionprofilo({Key? key}) : super(key: key);
@@ -12,6 +14,7 @@ class Gestionprofilo extends StatefulWidget {
 class _GestionprofiloState extends State<Gestionprofilo> {
   @override
   Widget build(BuildContext context) {
+    final infoutente = Userdata.utente;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -22,8 +25,10 @@ class _GestionprofiloState extends State<Gestionprofilo> {
         ),
         backgroundColor: Colors.pink[400],
         toolbarHeight: 70,
+        leading: BackButton(), //è un iconbutton con navigator.pop
       ),
-      drawer: Drawer(
+      endDrawer: Drawer(
+        elevation: 0,
         child: Material(
           color: Colors.pink[200],
           child: ListView(
@@ -57,68 +62,79 @@ class _GestionprofiloState extends State<Gestionprofilo> {
           ),
         ),
       ),
-      body: Column(
-        //crossAxisAlignment: CrossAxisAlignment.stretch,
+      body: ListView(
+        padding: EdgeInsets.only(top: 40),
+        physics: BouncingScrollPhysics(),
         children: [
-          Material(
-            child: SizedBox(
-              height: 28,
-            ),
+          ProfileWidget(
+            imagePath: infoutente.imagePath,
+            onclick: () => {},
           ),
-          Column(
-            children: [
-              ListTile(
-                trailing: IconButton(
-                  icon: Icon(Icons.edit),
-                  color: Colors.black87,
-                  splashRadius: 15,
-                  onPressed: () => {},
-                ),
-                leading: CircleAvatar(
-                  child: Icon(Icons.person),
-                ),
-                //tileColor: Colors.yellow,
-                title: Text('Edoardo'),
-              ),
-              SizedBox(
-                height: 48,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CircleAvatar(
-                    radius: 30,
-                    backgroundColor: Color(0xff94d500),
-                    child: IconButton(
-                      tooltip: 'Upload',
-                      icon: Icon(
-                        Icons.upload,
-                        color: Colors.black,
-                      ),
-                      onPressed: () {},
-                    ),
-                  ),
-                  SizedBox(
-                    width: 30,
-                  ),
-                  CircleAvatar(
-                    radius: 30,
-                    backgroundColor: Colors.red,
-                    child: IconButton(
-                      tooltip: 'Delete',
-                      icon: Icon(
-                        Icons.delete,
-                        color: Colors.black,
-                      ),
-                      onPressed: () {},
-                    ),
-                  ),
-                ],
-              ),
-            ],
+          SizedBox(
+            height: 24,
           ),
+          buildname(infoutente),
+          SizedBox(
+            height: 24,
+          ),
+          buildabout(infoutente),
         ],
       ),
+    );
+  }
+
+  Widget buildname(User u) {
+    return Column(
+      children: [
+        Text(
+          u.name,
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 24,
+          ),
+        ),
+        Text(
+          u.surname,
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 24,
+          ),
+        ),
+        SizedBox(
+          height: 4,
+        ),
+        Text(
+          u.email,
+          style: TextStyle(
+              fontWeight: FontWeight.bold, fontSize: 12, color: Colors.grey),
+        ),
+      ],
+    );
+  }
+
+  Widget buildabout(User infoutente) {
+    return Column(
+      children: [
+        Text(
+          'About',
+          style:
+              TextStyle(fontSize: 24, height: 1.4, fontWeight: FontWeight.bold),
+        ),
+        SizedBox(
+          height: 24,
+        ),
+        Text(
+          infoutente.about,
+          style: TextStyle(color: Colors.black87),
+          softWrap: true,
+        ),
+      ],
+    );
+  }
+
+  Widget buildsurname(User infoutente) {
+    return Row(
+      children: [Text(infoutente.surname)],
     );
   }
 }
