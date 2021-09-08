@@ -39,7 +39,9 @@ class _ReusablemenuState extends State<Reusablemenu> {
       title: Text(
         widget.titolo,
         style: TextStyle(
-            fontWeight: widget.spessoretesto, fontSize: widget.grandezzatesto),
+            fontWeight: widget.spessoretesto,
+            fontSize: widget.grandezzatesto,
+            color: widget.coloretesto),
       ),
       onTap: widget.funzioneontap,
     );
