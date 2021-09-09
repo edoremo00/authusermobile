@@ -7,7 +7,7 @@ NOTE
  menureusable è riutilizzabile ho usato una classe per farlo
 
  entrambi questi approcci portano allo stesso risultato
- test
+
 
 ## Getting Started
 
