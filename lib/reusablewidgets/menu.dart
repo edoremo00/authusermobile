@@ -48,6 +48,8 @@ class _MenuState extends State<Menu> {
                 icona: Icons.person_outline,
                 testo: 'Gestione Profilo',
                 funzioneontap: () => {
+                      Navigator.pop(
+                          context), //questo chiude il menu. cosi tornando indietro non lo trovo aperto
                       Navigator.pushNamed(context,
                           'gestioneprofilo') //BUG NON FUNZIONA NAVIGAZIONE
                     }),
@@ -78,7 +80,9 @@ class _MenuState extends State<Menu> {
                 ),
                 Text(
                   'by Edoardo Remondini',
-                  style: TextStyle(fontWeight: FontWeight.w600),
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                  ),
                 )
               ],
             )
