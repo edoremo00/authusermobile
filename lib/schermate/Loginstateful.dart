@@ -13,6 +13,7 @@ class Loginscreen extends StatefulWidget {
 
 class _LoginscreenState extends State<Loginscreen> {
   bool passwordobscured = true;
+  bool _drawerisopened = false;
   final usernameController = TextEditingController();
   final passwordcontroller = TextEditingController();
 
@@ -41,6 +42,12 @@ class _LoginscreenState extends State<Loginscreen> {
       home: WillPopScope(
         child: Scaffold(
           drawer: Menu(),
+          //callback chiamata ogni volta che drawer è aperto o chiuso.
+          //prende come parametro un booleano. che uso per aggiornare la mia
+          //variabile _drawerisopened.
+          //se mia variabile è true ritorno a willpopscope un future bool false
+          //altrimenti richiamo il dialog per uscire dall' app
+          onDrawerChanged: (isopened) => _drawerisopened = isopened,
           appBar: AppBar(
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.vertical(
@@ -179,7 +186,13 @@ class _LoginscreenState extends State<Loginscreen> {
             ),
           ),
         ),
-        onWillPop: () => showExitPopup(context),
+        onWillPop: () {
+          if (_drawerisopened == true) {
+            return Future.value(false);
+          } else {
+            return showExitPopup(context);
+          }
+        },
       ),
     );
   }
