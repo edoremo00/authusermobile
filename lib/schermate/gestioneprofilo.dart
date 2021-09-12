@@ -68,6 +68,8 @@ class _GestionprofiloState extends State<Gestionprofilo> {
         children: [
           ProfileWidget(
             imagePath: infoutente.imagePath,
+            imageheight: 128,
+            imagewidth: 128,
             onclick: () => {},
           ),
           SizedBox(
