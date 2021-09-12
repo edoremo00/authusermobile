@@ -61,14 +61,15 @@ class _LoginscreenState extends State<Loginscreen> {
           body: Container(
             margin: EdgeInsets.only(top: 3),
             decoration: BoxDecoration(
-                borderRadius:
-                    BorderRadius.vertical(top: Radius.elliptical(30, 30)),
+                /*borderRadius: BorderRadius.vertical(
+                  top: Radius.elliptical(30, 30),
+                ),*/
                 gradient: LinearGradient(
-                  colors: [
-                    Color.fromARGB(255, 52, 156, 225),
-                    Color.fromARGB(255, 142, 69, 173)
-                  ],
-                )),
+              colors: [
+                Color.fromARGB(255, 52, 156, 225),
+                Color.fromARGB(255, 142, 69, 173)
+              ],
+            )),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch,
