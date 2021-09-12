@@ -9,10 +9,10 @@ Future<bool> showExitPopup(context) async {
             height: 90,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              //mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 //Icon(Icons.exit_to_app_rounded),
                 Text("Uscire dall'APP?"),
-                //SizedBox(height: 20),
                 Row(
                   children: [
                     Expanded(
@@ -20,7 +20,7 @@ Future<bool> showExitPopup(context) async {
                         onPressed: () {
                           print('yes selected');
                           //exit(0);
-                          Navigator.of(context).pop();
+
                           Navigator.of(context).pop(true);
                         },
                         style: ElevatedButton.styleFrom(primary: Colors.green),
