@@ -70,7 +70,9 @@ class _GestionprofiloState extends State<Gestionprofilo> {
             imagePath: infoutente.imagePath,
             imageheight: 128,
             imagewidth: 128,
-            onclick: () => {},
+            onclick: () =>
+                {Navigator.pushNamed(context, 'editgestioneprofilo')},
+            isedit: false,
           ),
           SizedBox(
             height: 24,
