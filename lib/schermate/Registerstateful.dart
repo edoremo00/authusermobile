@@ -24,6 +24,7 @@ class _RegisterstattefulState extends State<Registerstatteful> {
         password: passwordcontroller.text,
         confirmpassword: confirmpasswordcontroller.text);
     return Scaffold(
+      backgroundColor: Colors.white,
       //# region Bottomnavbar
       /*bottomNavigationBar: BottomNavigationBar(
         items: [
@@ -38,6 +39,7 @@ class _RegisterstattefulState extends State<Registerstatteful> {
         ]
       ),*/
       //# end region
+
       appBar: AppBar(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
@@ -46,10 +48,10 @@ class _RegisterstattefulState extends State<Registerstatteful> {
         ),
         toolbarHeight: 70,
         title: Text(
-          'Registrati qui',
+          'Registrati',
           style: TextStyle(fontWeight: FontWeight.w500),
         ),
-        backgroundColor: Colors.pink[400],
+        backgroundColor: Color.fromARGB(255, 52, 156, 225),
         leading: IconButton(
             onPressed: () => {Navigator.pop(context, '/')},
             icon: Icon(Icons.arrow_back)),
@@ -109,7 +111,7 @@ class _RegisterstattefulState extends State<Registerstatteful> {
                     child: Text('Registrati'),
                     style: ElevatedButton.styleFrom(
                       fixedSize: Size(160, 60),
-                      primary: Colors.pink[400],
+                      primary: Color.fromARGB(255, 52, 156, 225),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(
                           Radius.circular(15),
