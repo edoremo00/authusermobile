@@ -23,11 +23,11 @@ class _GestionprofiloState extends State<Gestionprofilo> {
             bottom: Radius.circular(48),
           ),
         ),
-        backgroundColor: Colors.pink[400],
+        backgroundColor: Color.fromARGB(255, 52, 156, 225),
         toolbarHeight: 70,
         leading: BackButton(), //è un iconbutton con navigator.pop
       ),
-      endDrawer: Drawer(
+      /*endDrawer: Drawer(
         elevation: 0,
         child: Material(
           color: Colors.pink[200],
@@ -61,7 +61,7 @@ class _GestionprofiloState extends State<Gestionprofilo> {
             ],
           ),
         ),
-      ),
+      ),*/
       body: ListView(
         padding: EdgeInsets.only(top: 40),
         physics: BouncingScrollPhysics(),
