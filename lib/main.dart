@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:testlogin/schermate/Loginstateful.dart';
 import 'package:testlogin/schermate/Registerstateful.dart';
 import 'package:testlogin/schermate/gestioneprofilo.dart';
+import 'package:testlogin/schermate/LoginPage.dart';
 
 void main() {
   runApp(MyApp());
@@ -12,16 +12,18 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        scaffoldBackgroundColor: Colors.white,
+      ),
       debugShowCheckedModeBanner: false,
-      //theme: ThemeData(primaryColor: Colors.blue.shade300),
       title: 'Flutter Demo',
       routes: {
         'Register': (context) => Registerstatteful(),
-        '/': (context) => Loginscreen(),
-        'gestioneprofilo': (context) => Gestionprofilo()
+        'gestioneprofilo': (context) => Gestionprofilo(),
+        'testgradient': (context) => LoginPage(),
       },
       //theme: ThemeData(),
-      //home: Loginscreen(),
+      home: LoginPage(),
       initialRoute: '/',
     );
   }
