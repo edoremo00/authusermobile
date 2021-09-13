@@ -5,12 +5,14 @@ class ProfileWidget extends StatelessWidget {
   final VoidCallback onclick;
   final double imagewidth;
   final double imageheight;
+  bool isedit;
 
-  const ProfileWidget(
+  ProfileWidget(
       {required this.imagePath,
       required this.onclick,
       required this.imageheight,
-      required this.imagewidth});
+      required this.imagewidth,
+      required this.isedit});
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +60,7 @@ class ProfileWidget extends StatelessWidget {
         padding: EdgeInsets.all(10),
         color: Colors.blue,
         child: Icon(
-          Icons.edit,
+          isedit ? Icons.add_a_photo : Icons.edit,
           size: 20,
           color: Colors.white,
         ),
