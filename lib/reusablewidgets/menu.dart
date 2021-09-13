@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:testlogin/model/userdata.dart';
 import 'package:testlogin/schermate/profileiconmenu.dart';
-import 'package:testlogin/schermate/profilewidget.dart';
 
 //APPROCIO CREAZIONE VOCI MENU DRAWER TRAMITE FUNZIONE
 class Menu extends StatefulWidget {
@@ -18,7 +17,7 @@ class _MenuState extends State<Menu> {
     return Drawer(
       child: Material(
         //Material deve essere prima di un listitle così posso avere un feedback se ci clicco sopra
-        color: Colors.pink[200],
+        color: Colors.white10,
         child: ListView(
           children: [
             Container(
@@ -32,7 +31,7 @@ class _MenuState extends State<Menu> {
               ),
             ),
             Divider(
-              color: Colors.white70,
+              color: Colors.black54,
               indent: 20,
               endIndent: 20,
             ),
@@ -57,16 +56,20 @@ class _MenuState extends State<Menu> {
             SizedBox(
               height: 20,
             ),
-            /*menuitems(
-                coloreicona: Colors.black87,
-                icona: Icons.logout_outlined,
-                testo: 'Esci',
-                funzioneontap: () => {}),*/
+            menuitems(
+              coloreicona: Colors.black87,
+              icona: Icons.logout_outlined,
+              testo: 'Logout',
+              funzioneontap: () => {},
+            ),
+            SizedBox(
+              height: 20,
+            ),
             /*SizedBox(
               height: 48,
             ),*/
             Divider(
-              color: Colors.white70,
+              color: Colors.black54,
               indent: 20,
               endIndent: 20,
             ),
