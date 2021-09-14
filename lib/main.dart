@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.white,
       ),
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'Authflutter',
       routes: {
         'Register': (context) => Registerstatteful(),
         'gestioneprofilo': (context) => Gestionprofilo(),
