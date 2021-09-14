@@ -1,3 +1,4 @@
+import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:testlogin/apiclasses/loginusermodel.dart';
 import 'package:testlogin/reusablewidgets/menu.dart';
@@ -81,12 +82,14 @@ class _LoginPageState extends State<LoginPage> {
                         Padding(
                           padding: EdgeInsets.all(25),
                           child: TextFormField(
+                            autocorrect: true,
                             validator: (username) {
                               if (username!.isEmpty) {
                                 return 'inserisci un username';
-                              } else if (username.characters.string
-                                  .startsWith('[0-9]')) {
+                              } else if (username.startsWith(RegExp('[0-9]'))) {
                                 return 'il tuo username non può cominciare con dei numeri';
+                              } else if (username.contains(' ')) {
+                                return 'il campo username non può avere spazi';
                               } else {
                                 return null;
                               }
@@ -129,14 +132,27 @@ class _LoginPageState extends State<LoginPage> {
                             validator: (password) {
                               if (password!.isEmpty) {
                                 return 'inserisci una password';
+                              } else if (validateStructure(password) == false) {
+                                Flushbar(
+                                  icon: Icon(
+                                    Icons.dangerous,
+                                    color: Colors.black,
+                                  ),
+                                  backgroundColor: Colors.redAccent,
+                                  message:
+                                      'la password deve avere una lettera maiuscola dei numeri un carattere speciale ed essere lunga almeno 8 caratteri',
+                                  title:
+                                      'la password non rispetta i seguenti requisiti',
+                                  duration: Duration(seconds: 4),
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(15),
+                                  ),
+                                  margin: EdgeInsets.all(10),
+                                  //flushbarPosition: FlushbarPosition.TOP,
+                                ).show(context);
+                                return '';
                               } else if (password.isNotEmpty) {
                                 return null;
-                              } else if (password.startsWith(' ') &&
-                                  (password.endsWith(' ') ||
-                                      password.startsWith(' ') ||
-                                      password.endsWith(' '))) {
-                                return 'la password non può avere spazi all'
-                                    'inizio o alla fine';
                               } else {
                                 return null;
                               }
@@ -165,12 +181,29 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                         ElevatedButton(
-                          onPressed: () => {
+                          onPressed: () async => {
                             //log.createuser(log)
-                            if (!_formkey.currentState!.validate())
+                            if (_formkey.currentState!.validate() == false)
                               {}
                             else
-                              {log.createuser(log)},
+                              {
+                                await Flushbar(
+                                  title: 'Thank you',
+                                  message: 'Processing data...',
+                                  icon: Icon(
+                                    Icons.info,
+                                    color: Colors.black,
+                                  ),
+                                  duration: Duration(seconds: 3),
+                                  backgroundColor: Colors.blueAccent,
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(15),
+                                  ),
+                                  margin: EdgeInsets.all(10),
+                                )
+                                    .show(context)
+                                    .whenComplete(() => log.createuser(log))
+                              },
                           },
                           child: Text('Accedi'),
                           style: ElevatedButton.styleFrom(
@@ -218,4 +251,11 @@ class _LoginPageState extends State<LoginPage> {
       },
     );
   }
+}
+
+bool validateStructure(String value) {
+  String pattern =
+      r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
+  RegExp regExp = new RegExp(pattern);
+  return regExp.hasMatch(value);
 }
