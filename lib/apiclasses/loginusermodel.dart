@@ -17,7 +17,7 @@ class Login {
   Future<Login> createuser(Login log) async {
     final response = await http.post(
       Uri.parse(
-          'https://localhost:44322/api/Auth/login'), //https://10.0.2.2:44322/api/Auth/login //127.0.0.1:  https://localhost:44322/api/Auth/login--> usa questo se esegui app da browser //https://authflutterapi.azurewebsites.net/api/Auth/login
+          'http://10.0.2.2:44322/api/Auth/login'), //https://10.0.2.2:44322/api/Auth/login //127.0.0.1:  https://localhost:44322/api/Auth/login--> usa questo se esegui app da browser //https://authflutterapi.azurewebsites.net/api/Auth/login
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Accept': 'application/json'
@@ -62,7 +62,7 @@ class Register {
 
   Future<dynamic> registeruser(Register nuovo) async {
     final response = await http.post(
-      Uri.parse('https://localhost:44322/api/Auth'),
+      Uri.parse('https://authflutterapi.azurewebsites.net/api/Auth/login'),
       body: jsonEncode(<String, String>{
         'username': username,
         'email': email,
