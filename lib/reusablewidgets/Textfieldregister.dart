@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 class Textfieldregister extends StatefulWidget {
   //Textfieldregister({Key? key}) : super(key: key);
   final String labeltext;
-  final Icon? suffixicon;
+  final Widget? suffixicon;
   final Icon? prefixicon;
   final TextInputType? textInputType;
   final bool obscuretext;
   final TextInputAction? textInputAction;
   final TextEditingController textEditingController;
+  final String? Function(String? value)? validator;
 
   const Textfieldregister(
       {this.suffixicon,
@@ -17,7 +18,8 @@ class Textfieldregister extends StatefulWidget {
       this.textInputType,
       this.obscuretext = false,
       this.textInputAction,
-      required this.textEditingController}); //graffe indicano che i parametri sono opzionali
+      required this.textEditingController,
+      this.validator}); //graffe indicano che i parametri sono opzionali
 
   @override
   _TextfieldregisterState createState() => _TextfieldregisterState();
@@ -25,13 +27,9 @@ class Textfieldregister extends StatefulWidget {
 
 class _TextfieldregisterState extends State<Textfieldregister> {
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
+      validator: widget.validator,
       controller: widget.textEditingController,
       decoration: InputDecoration(
         labelText: widget.labeltext,
