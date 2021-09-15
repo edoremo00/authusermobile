@@ -4,7 +4,11 @@ import 'package:testlogin/schermate/editgestioneprofilo.dart';
 import 'package:testlogin/schermate/gestioneprofilo.dart';
 import 'package:testlogin/schermate/LoginPage.dart';
 
-void main() {
+import 'model/userdata.dart';
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Userdata.init();
   runApp(MyApp());
 }
 
