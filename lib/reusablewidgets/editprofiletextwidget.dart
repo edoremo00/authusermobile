@@ -5,12 +5,15 @@ class Editprofiletextwidget extends StatefulWidget {
   final String text;
   final int maxlines;
   final ValueChanged<String> onchanged;
-  TextEditingController? controller;
-  Editprofiletextwidget(
+  final String? Function(String? value)? validator;
+  final TextEditingController? controller;
+
+  const Editprofiletextwidget(
       {Key? key,
       required this.label,
       required this.text,
       required this.onchanged,
+      required this.validator,
       this.maxlines = 1,
       this.controller})
       : super(key: key);
@@ -29,15 +32,17 @@ class _EditprofiletextwidgetState extends State<Editprofiletextwidget> {
           widget.label,
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
         ),
-        TextField(
+        TextFormField(
+          onChanged: widget.onchanged,
           maxLines: widget.maxlines,
           controller: widget.controller,
+          validator: widget.validator,
           decoration: InputDecoration(
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
             ),
           ),
-        )
+        ),
       ],
     );
   }
