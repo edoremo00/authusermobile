@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:testlogin/model/user.dart';
 import 'package:testlogin/model/userdata.dart';
-import 'package:testlogin/reusablewidgets/menureusable.dart';
 import 'package:testlogin/schermate/profilewidget.dart';
 
 class Gestionprofilo extends StatefulWidget {
@@ -14,7 +13,7 @@ class Gestionprofilo extends StatefulWidget {
 class _GestionprofiloState extends State<Gestionprofilo> {
   @override
   Widget build(BuildContext context) {
-    final infoutente = Userdata.utente;
+    final infoutente = Userdata.getUser();
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -70,8 +69,12 @@ class _GestionprofiloState extends State<Gestionprofilo> {
             imagePath: infoutente.imagePath,
             imageheight: 128,
             imagewidth: 128,
-            onclick: () =>
-                {Navigator.pushNamed(context, 'editgestioneprofilo')},
+            onclick:
+                () async // va modificato se modifio dati deve ricostruire UI
+                {
+              await Navigator.pushNamed(context, 'editgestioneprofilo');
+              setState(() {});
+            },
             isedit: false,
           ),
           SizedBox(
