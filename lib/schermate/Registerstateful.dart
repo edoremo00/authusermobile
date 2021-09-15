@@ -27,6 +27,15 @@ class _RegisterstattefulState extends State<Registerstatteful> {
   }
 
   @override
+  void dispose() {
+    usernamecontroller.dispose();
+    emailcontroller.dispose();
+    passwordcontroller.dispose();
+    confirmpasswordcontroller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final _formkey = GlobalKey<FormState>();
     Register reg = Register(
@@ -141,7 +150,7 @@ class _RegisterstattefulState extends State<Registerstatteful> {
                           return 'inserisci una password';
                         } else if (password.contains(' ')) {
                           return 'la password non può contenere spazi';
-                        } else if (validateStructure(password) == false) {
+                        } else if (validatepassword(password) == false) {
                           Flushbar(
                             icon: Icon(
                               Icons.dangerous,
@@ -179,8 +188,7 @@ class _RegisterstattefulState extends State<Registerstatteful> {
                           return 'inserisci conferma password';
                         } else if (confirmpassword.contains(' ')) {
                           return 'la password non può contenere spazi';
-                        } else if (validateStructure(confirmpassword) ==
-                            false) {
+                        } else if (validatepassword(confirmpassword) == false) {
                           Flushbar(
                             icon: Icon(
                               Icons.dangerous,
