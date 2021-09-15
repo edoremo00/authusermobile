@@ -20,6 +20,13 @@ class _LoginPageState extends State<LoginPage> {
     //questa funzione rimane in ascolto del mio controller username e vede se ci sono cambiamenti
   }
 
+  @override
+  void dispose() {
+    usernameController.dispose();
+    passwordcontroller.dispose();
+    super.dispose();
+  }
+
   final usernameController = TextEditingController();
   final passwordcontroller = TextEditingController();
   final _formkey =
@@ -82,6 +89,8 @@ class _LoginPageState extends State<LoginPage> {
                         Padding(
                           padding: EdgeInsets.all(25),
                           child: TextFormField(
+                            //autovalidateMode:
+                            //AutovalidateMode.onUserInteraction,
                             autocorrect: true,
                             validator: (username) {
                               if (username!.isEmpty) {
@@ -128,11 +137,9 @@ class _LoginPageState extends State<LoginPage> {
                           padding: EdgeInsets.only(
                               top: 5, left: 20, right: 20, bottom: 30),
                           child: TextFormField(
-                            //onChanged: (passw) => {setState(() {})},
-                            validator: (password) {
-                              if (password!.isEmpty) {
-                                return 'inserisci una password';
-                              } else if (validateStructure(password) == false) {
+                            /*onEditingComplete: () {  FUNZIONA SOLO SE PREMO TASTO SU TASTIERA SENNO NO 
+                              if (validateStructure(passwordcontroller.text) ==
+                                  false) {
                                 Flushbar(
                                   icon: Icon(
                                     Icons.dangerous,
@@ -149,6 +156,32 @@ class _LoginPageState extends State<LoginPage> {
                                   ),
                                   margin: EdgeInsets.all(10),
                                   //flushbarPosition: FlushbarPosition.TOP,
+                                ).show(context);
+                              } else {}
+                            },*/
+
+                            //autovalidateMode: AutovalidateMode
+                            //.onUserInteraction, //=> SERVE PER VALIDARE CAMPI QUANDO UTENTE SCRIVE TUTTAVIA DA PROBLEMI CON FLUSHBAR CHE RIMANE LO STESSO
+                            //onChanged: (passw) => {setState(() {})},
+                            validator: (password) {
+                              if (password!.isEmpty) {
+                                return 'inserisci una password';
+                              } else if (validatepassword(password) == false) {
+                                Flushbar(
+                                  icon: Icon(
+                                    Icons.dangerous,
+                                    color: Colors.black,
+                                  ),
+                                  backgroundColor: Colors.redAccent,
+                                  message:
+                                      'la password deve avere una lettera maiuscola dei numeri un carattere speciale ed essere lunga almeno 8 caratteri',
+                                  title:
+                                      'la password non rispetta i seguenti requisiti',
+                                  duration: Duration(seconds: 4),
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(15),
+                                  ),
+                                  margin: EdgeInsets.all(10),
                                 ).show(context);
                                 return '';
                               } else if (password.isNotEmpty) {
@@ -253,7 +286,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 }
 
-bool validateStructure(String value) {
+bool validatepassword(String value) {
   String pattern =
       r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
   RegExp regExp = new RegExp(pattern);
