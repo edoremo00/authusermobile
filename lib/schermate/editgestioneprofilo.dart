@@ -3,11 +3,11 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:testlogin/formvalidation/formvalidationmethods.dart';
 import 'package:testlogin/model/user.dart';
 import 'package:testlogin/model/userdata.dart';
 import 'package:testlogin/reusablewidgets/appbar.dart';
 import 'package:testlogin/reusablewidgets/editprofiletextwidget.dart';
-import 'package:testlogin/schermate/Registerstateful.dart';
 import 'package:testlogin/schermate/profilewidget.dart';
 import 'package:path/path.dart';
 
