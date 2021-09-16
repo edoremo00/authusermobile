@@ -44,4 +44,19 @@ class User {
       imagePath: user['imagePath'],
       name: user['name'],
       surname: user['surname']);
+
+  /*@override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is User &&
+          runtimeType == other.runtimeType &&
+          name == other.name &&
+          surname == other.surname &&
+          about == other.about &&
+          email == other.email;
+
+  @override
+  // TODO: implement hashCode
+  int get hashCode => hashValues(
+      name.hashCode, surname.hashCode, about.hashCode, email.hashCode);*/
 }
