@@ -20,6 +20,7 @@ class Editgestioneprofilo extends StatefulWidget {
 
 class _EditgestioneprofiloState extends State<Editgestioneprofilo> {
   User u = Userdata.getUser();
+  //User hardcoded = Userdata.utente;
   late GlobalKey<FormState> _formkey = GlobalKey<FormState>();
   late TextEditingController usernamecontroller;
   late TextEditingController surnamecontroller;
@@ -71,9 +72,10 @@ class _EditgestioneprofiloState extends State<Editgestioneprofilo> {
                     File('${directorysalvafoto.path}/$imagenamefile');
                 final nuovaimmagine =
                     await File(image.path).copy(imagefile.path);
-                setState(() {
-                  u.copy(imagePath: nuovaimmagine.path);
-                });
+                setState(() => u =
+                    //u.copy(imagePath: nuovaimmagine.path);
+                    u.copy(imagePath: nuovaimmagine.path));
+                //u.imagePath = nuovaimmagine.path;
               },
               imageheight: 128,
               imagewidth: 128,
