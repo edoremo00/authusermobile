@@ -4,9 +4,9 @@ class User {
   final String surname;
   final String about;
 
-  String name;
+  final String name;
 
-  User({
+  const User({
     required this.imagePath,
     required this.email,
     required this.name,
