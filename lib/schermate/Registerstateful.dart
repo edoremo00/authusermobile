@@ -1,8 +1,8 @@
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:testlogin/apiclasses/loginusermodel.dart';
+import 'package:testlogin/formvalidation/formvalidationmethods.dart';
 import 'package:testlogin/reusablewidgets/Textfieldregister.dart';
-import 'package:testlogin/schermate/LoginPage.dart';
 
 class Registerstatteful extends StatefulWidget {
   const Registerstatteful({Key? key}) : super(key: key);
@@ -19,8 +19,6 @@ class _RegisterstattefulState extends State<Registerstatteful> {
 
   @override
   void initState() {
-    // TODO: implement initState
-
     //usernamecontroller.addListener(() => setState(() {}));
     //emailcontroller.addListener(() => setState(() {}));
     super.initState();
@@ -263,18 +261,4 @@ class _RegisterstattefulState extends State<Registerstatteful> {
       ),
     );
   }
-}
-
-bool validateemail(String email) {
-  String pattern =
-      r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{;|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$";
-  RegExp regExp = RegExp(pattern);
-  return regExp.hasMatch(email);
-}
-
-bool passwordmatch(String password, String confirmpassword) {
-  if (password.toLowerCase() == confirmpassword.toLowerCase()) {
-    return true;
-  }
-  return false;
 }
