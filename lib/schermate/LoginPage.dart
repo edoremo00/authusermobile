@@ -1,6 +1,7 @@
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:testlogin/apiclasses/loginusermodel.dart';
+import 'package:testlogin/formvalidation/formvalidationmethods.dart';
 import 'package:testlogin/reusablewidgets/menu.dart';
 import 'package:testlogin/schermate/exitpopup.dart';
 
@@ -284,11 +285,4 @@ class _LoginPageState extends State<LoginPage> {
       },
     );
   }
-}
-
-bool validatepassword(String value) {
-  String pattern =
-      r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
-  RegExp regExp = new RegExp(pattern);
-  return regExp.hasMatch(value);
 }
