@@ -13,7 +13,7 @@ class Menu extends StatefulWidget {
 class _MenuState extends State<Menu> {
   @override
   Widget build(BuildContext context) {
-    final infoutente = Userdata.utente;
+    final infoutente = Userdata.getUser();
     return Drawer(
       child: Material(
         //Material deve essere prima di un listitle così posso avere un feedback se ci clicco sopra
