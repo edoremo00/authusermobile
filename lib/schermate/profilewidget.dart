@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 
 class ProfileWidget extends StatelessWidget {
-  final String imagePath;
+  String imagePath;
   final VoidCallback onclick;
   final double imagewidth;
   final double imageheight;
