@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:testlogin/model/user.dart';
 import 'package:testlogin/model/userdata.dart';
@@ -37,13 +39,15 @@ class Profileiconmenu extends StatelessWidget {
   }
 
   Widget buildimage() {
-    final image = NetworkImage(imagepath);
+    final image = imagepath.contains('https://')
+        ? NetworkImage(imagepath)
+        : FileImage(File(imagepath));
     return ClipOval(
       child: Material(
         //senza di lui immagine non sarà ovale
         color: Colors.transparent,
         child: Ink.image(
-          image: image,
+          image: image as ImageProvider,
           fit: BoxFit.cover,
           width: imagewidth,
           height: imageheight,
