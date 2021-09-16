@@ -20,12 +20,16 @@ class Editgestioneprofilo extends StatefulWidget {
 
 class _EditgestioneprofiloState extends State<Editgestioneprofilo> {
   User u = Userdata.getUser();
+  User defaultuser = Userdata.utente;
+  //late bool isbuttondisabled;
   //User hardcoded = Userdata.utente;
+  late bool isbuttonvisible;
   late GlobalKey<FormState> _formkey = GlobalKey<FormState>();
   late TextEditingController usernamecontroller;
   late TextEditingController surnamecontroller;
   late TextEditingController emailcontroller;
   late TextEditingController aboutcontroller;
+  final _snackBar = SnackBar(content: Text('Profilo aggiornato con successo'));
 
   @override
   void initState() {
@@ -34,6 +38,8 @@ class _EditgestioneprofiloState extends State<Editgestioneprofilo> {
     surnamecontroller = TextEditingController(text: u.surname);
     emailcontroller = TextEditingController(text: u.email);
     aboutcontroller = TextEditingController(text: u.about);
+    //isbuttondisabled = false;
+
     _formkey = GlobalKey<FormState>();
   }
 
@@ -163,9 +169,23 @@ class _EditgestioneprofiloState extends State<Editgestioneprofilo> {
             ),
             ElevatedButton.icon(
               onPressed: () {
+                //onsavedclicked();
+
+                //!_formkey.currentState!.validate() && isbuttondisabled == false
+                //? setState(() {
+                // isbuttondisabled = true;
+                // })
+                // : setState(() {
+                // isbuttondisabled = false;
+                //}); //ScaffoldMessenger.of(context).showSnackBar(_snackBar);
+
+//METODO PRECEDENTE
+
                 if (_formkey.currentState!.validate() == false) {
+                  //u == defaultuser ho implementato equatable per capire se oggetto salvato è uguale a quello predefinito. se lo è non salvo
                   //se form non è valido non sovrascrivo oggetto
                 } else {
+                  ScaffoldMessenger.of(context).showSnackBar(_snackBar);
                   Userdata.setUser(u);
                 }
               }, //u.name = usernamecontroller.text => PER MODIFICARE CAMPI UTENTE, BISOGNA TOGLIERE TUTTI I CAMPI FINAL PER FARLO FUNZIONARE. INOLTRE DATI NON SI AGGIORNANO SUBITO
@@ -180,10 +200,24 @@ class _EditgestioneprofiloState extends State<Editgestioneprofilo> {
                     ),
                   ),
                   padding: EdgeInsets.all(10)),
-            )
+            ),
           ],
         ),
       ),
     );
+  }
+
+//METODO MALFUNZIONANTE PER SETTARE CALLBACK BOTTONE A NULL
+  onsavedclicked() {
+    if (_formkey.currentState!.validate() == false) {
+      setState(() {
+        //isbuttondisabled = true;
+        return null; // how to make onpressed  callback null? in order to disable the button?
+      });
+    } else {
+      //ScaffoldMessenger.of(context as BuildContext)
+      //.showSnackBar(_snackBar);
+      return Userdata.setUser(u);
+    }
   }
 }
