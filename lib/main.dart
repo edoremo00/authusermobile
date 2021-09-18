@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:testlogin/model/firstseen.dart';
 import 'package:testlogin/schermate/Registerstateful.dart';
 import 'package:testlogin/schermate/editgestioneprofilo.dart';
 import 'package:testlogin/schermate/gestioneprofilo.dart';
 import 'package:testlogin/schermate/LoginPage.dart';
+import 'package:testlogin/schermate/introductionscreen.dart';
 
 import 'model/userdata.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Userdata.init();
+  await Firstseen.init();
+  Firstseen.checkfirsseen();
   runApp(MyApp());
 }
 
@@ -23,14 +27,15 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Authflutter',
       routes: {
+        'LoginPage': (context) => LoginPage(),
         'Register': (context) => Registerstatteful(),
         'gestioneprofilo': (context) => Gestionprofilo(),
         'testgradient': (context) => LoginPage(),
         'editgestioneprofilo': (context) => Editgestioneprofilo()
       },
       //theme: ThemeData(),
-      home: LoginPage(),
-      initialRoute: '/',
+      home: Firstseen.checkfirsseen() ? Introscreen() : LoginPage(),
+      //initialRoute: '/',
     );
   }
 }
