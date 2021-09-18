@@ -34,6 +34,8 @@ dependencies:
   image_picker: ^0.8.4+1
   path_provider: ^2.0.3
   introduction_screen: ^2.1.0
+  flutter_custom_tabs: ^1.0.3
+  
 
 dev_dependencies:
   flutter_test:
@@ -59,6 +61,7 @@ flutter:
     - android/assets/githublogo.png
     - android/assets/instagramlogo.png
     - android/assets/twitterlogo.png
+    - android/assets/pacmanhappy.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
