@@ -4,7 +4,7 @@ import 'package:testlogin/schermate/Registerstateful.dart';
 import 'package:testlogin/schermate/editgestioneprofilo.dart';
 import 'package:testlogin/schermate/gestioneprofilo.dart';
 import 'package:testlogin/schermate/LoginPage.dart';
-import 'package:testlogin/schermate/introductionscreen.dart';
+import 'package:testlogin/schermate/introscreenv2.dart';
 
 import 'model/userdata.dart';
 
@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
         'editgestioneprofilo': (context) => Editgestioneprofilo()
       },
       //theme: ThemeData(),
-      home: Firstseen.checkfirsseen() ? Introscreen() : LoginPage(),
+      home: Firstseen.checkfirsseen() ? Introscreenv2() : LoginPage(),
       //initialRoute: '/',
     );
   }
