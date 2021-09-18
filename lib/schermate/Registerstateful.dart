@@ -81,7 +81,7 @@ class _RegisterstattefulState extends State<Registerstatteful> {
             Expanded(
               // wrappare expanded è fondamentale, senza non ho lo scrolling della pagina
               child: SingleChildScrollView(
-                //primary: true,
+                physics: BouncingScrollPhysics(),
                 padding:
                     EdgeInsets.only(top: 60, left: 30, right: 30, bottom: 30),
                 child: Column(
