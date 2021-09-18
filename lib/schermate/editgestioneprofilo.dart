@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:testlogin/formvalidation/formvalidationmethods.dart';
 import 'package:testlogin/model/user.dart';
 import 'package:testlogin/model/userdata.dart';
@@ -30,6 +31,7 @@ class _EditgestioneprofiloState extends State<Editgestioneprofilo> {
   late TextEditingController emailcontroller;
   late TextEditingController aboutcontroller;
   final _snackBar = SnackBar(content: Text('Profilo aggiornato con successo'));
+  late bool isloading;
 
   @override
   void initState() {
@@ -41,6 +43,7 @@ class _EditgestioneprofiloState extends State<Editgestioneprofilo> {
     //isbuttondisabled = false;
 
     _formkey = GlobalKey<FormState>();
+    isloading = false;
   }
 
   @override
@@ -68,19 +71,24 @@ class _EditgestioneprofiloState extends State<Editgestioneprofilo> {
             ProfileWidget(
               imagePath: u.imagePath,
               onclick: () async {
-                final image =
-                    await ImagePicker().pickImage(source: ImageSource.gallery);
-                if (image == null) return;
+                final image = await ImagePicker().pickImage(
+                    source: ImageSource
+                        .gallery); //prendo immagine da file e la salvo in variabile
+                if (image == null) return; //se non scelgo immagine esco;
                 final directorysalvafoto =
-                    await getApplicationDocumentsDirectory();
-                final imagenamefile = basename(image.path);
-                final imagefile =
+                    await getApplicationDocumentsDirectory(); //questo metodo restituisce directory che usa applicazione per salvare dati
+                final imagenamefile = basename(image
+                    .path); // con basename ottengo solo nome file immagine scelta
+                final imagefile = // questo sarà il path completo della nuova immagine. dato da directory + basename
                     File('${directorysalvafoto.path}/$imagenamefile');
-                final nuovaimmagine =
-                    await File(image.path).copy(imagefile.path);
+                final nuovaimmagine = await File(image.path).copy(imagefile
+                    .path); //creo un file con path immagine e lo copio nella cartella
                 setState(() => u =
                     //u.copy(imagePath: nuovaimmagine.path);
-                    u.copy(imagePath: nuovaimmagine.path));
+
+                    u.copy(
+                        imagePath: nuovaimmagine
+                            .path)); //sovrascrivo nuove property a oggetto user e aggiorno UI con setstate
                 //u.imagePath = nuovaimmagine.path;
               },
               imageheight: 128,
@@ -168,32 +176,47 @@ class _EditgestioneprofiloState extends State<Editgestioneprofilo> {
               height: 24,
             ),
             ElevatedButton.icon(
-              onPressed: () {
-                //onsavedclicked();
-
-                //!_formkey.currentState!.validate() && isbuttondisabled == false
-                //? setState(() {
-                // isbuttondisabled = true;
-                // })
-                // : setState(() {
-                // isbuttondisabled = false;
-                //}); //ScaffoldMessenger.of(context).showSnackBar(_snackBar);
-
+              onPressed: () async {
 //METODO PRECEDENTE
-
+                //AGGIUSTARE METODO useralredyinsharedpreferences()
                 if (_formkey.currentState!.validate() == false) {
+                  //await useralredyinsharedpreferences();
                   //u == defaultuser ho implementato equatable per capire se oggetto salvato è uguale a quello predefinito. se lo è non salvo
                   //se form non è valido non sovrascrivo oggetto
+
                 } else {
+                  setState(() {
+                    isloading = !isloading;
+                  });
+                  await Future.delayed(Duration(seconds: 3)).whenComplete(
+                    () => setState(
+                      () {
+                        isloading = false;
+                      },
+                    ),
+                  );
                   ScaffoldMessenger.of(context).showSnackBar(_snackBar);
-                  Userdata.setUser(u);
+                  /*await Future.delayed(const Duration(seconds: 5), () {
+                    ScaffoldMessenger.of(context).clearSnackBars();
+                  });*/
+                  await Userdata.setUser(u);
                 }
               }, //u.name = usernamecontroller.text => PER MODIFICARE CAMPI UTENTE, BISOGNA TOGLIERE TUTTI I CAMPI FINAL PER FARLO FUNZIONARE. INOLTRE DATI NON SI AGGIORNANO SUBITO
-              icon: Icon(Icons.save),
-              label: Text('Salva'),
+              icon: isloading
+                  ? Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        CircularProgressIndicator(
+                          strokeWidth: 3,
+                          color: Colors.white,
+                        ),
+                      ],
+                    )
+                  : Icon(Icons.save), //Icon(Icons.save),
+              label: isloading ? Text('Attendere prego') : Text('Salva'),
               style: ElevatedButton.styleFrom(
                   primary: Color.fromARGB(255, 52, 156, 225),
-                  fixedSize: Size(200, 50),
+                  fixedSize: Size(200, 55),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(
                       Radius.circular(15),
@@ -219,5 +242,19 @@ class _EditgestioneprofiloState extends State<Editgestioneprofilo> {
       //.showSnackBar(_snackBar);
       return Userdata.setUser(u);
     }
+  }
+
+  Future<bool> useralredyinsharedpreferences() async {
+    //a volte funziona altre ti dice che c' è un oggetto salvato che è uguale anche se non è così. problema penso sia il contains. se metto
+    //lettera non presente nel mio nome allora salva altrimenti no. profare altri metodi
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    if (prefs.getString('user')!.contains(usernamecontroller.text) &&
+        prefs.getString('user')!.contains(surnamecontroller.text) &&
+        prefs.getString('user')!.contains(emailcontroller.text) &&
+        prefs.getString('user')!.contains(u.imagePath)) {
+      print('già presente');
+      return Future.value(true);
+    }
+    return Future.value(false);
   }
 }
