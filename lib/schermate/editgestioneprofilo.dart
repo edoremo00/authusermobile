@@ -32,6 +32,7 @@ class _EditgestioneprofiloState extends State<Editgestioneprofilo> {
   late TextEditingController aboutcontroller;
   final _snackBar = SnackBar(content: Text('Profilo aggiornato con successo'));
   late bool isloading;
+  late bool cameraselected;
 
   @override
   void initState() {
@@ -44,6 +45,7 @@ class _EditgestioneprofiloState extends State<Editgestioneprofilo> {
 
     _formkey = GlobalKey<FormState>();
     isloading = false;
+    cameraselected = false;
   }
 
   @override
@@ -71,9 +73,13 @@ class _EditgestioneprofiloState extends State<Editgestioneprofilo> {
             ProfileWidget(
               imagePath: u.imagePath,
               onclick: () async {
+                await selectpicturemessage(
+                    context); //problema se utente chiude dialog ritorna null
                 final image = await ImagePicker().pickImage(
-                    source: ImageSource
-                        .gallery); //prendo immagine da file e la salvo in variabile
+                    source: cameraselected
+                        ? ImageSource.camera
+                        : ImageSource.gallery);
+                //prendo immagine da file e la salvo in variabile
                 if (image == null) return; //se non scelgo immagine esco;
                 final directorysalvafoto =
                     await getApplicationDocumentsDirectory(); //questo metodo restituisce directory che usa applicazione per salvare dati
@@ -256,5 +262,39 @@ class _EditgestioneprofiloState extends State<Editgestioneprofilo> {
       return Future.value(true);
     }
     return Future.value(false);
+  }
+
+  Future<dynamic> selectpicturemessage(BuildContext context) async {
+    return await showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            content: Container(
+              child: Row(
+                children: [
+                  ElevatedButton.icon(
+                    onPressed: () {
+                      cameraselected = false;
+                      Navigator.pop(context, true); //per chiudere dialog
+                    },
+                    icon: Icon(Icons.photo_size_select_actual_outlined),
+                    label: Text('Gallery'),
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  ElevatedButton.icon(
+                    onPressed: () {
+                      cameraselected = true;
+                      Navigator.pop(context, true);
+                    },
+                    icon: Icon(Icons.camera),
+                    label: Text("Create new"),
+                  )
+                ],
+              ),
+            ),
+          );
+        });
   }
 }
