@@ -4,7 +4,7 @@ class Editprofiletextwidget extends StatefulWidget {
   final String label;
   final String text;
   final int maxlines;
-  final ValueChanged<String> onchanged;
+  final ValueChanged<String>? onchanged;
   final String? Function(String? value)? validator;
   final TextEditingController? controller;
 
@@ -12,7 +12,7 @@ class Editprofiletextwidget extends StatefulWidget {
       {Key? key,
       required this.label,
       required this.text,
-      required this.onchanged,
+      this.onchanged,
       required this.validator,
       this.maxlines = 1,
       this.controller})
