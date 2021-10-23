@@ -16,12 +16,10 @@ class Introscreenv2 extends StatelessWidget {
           physics: BouncingScrollPhysics(),
           padding: EdgeInsets.all(24),
           children: [
-            Center(
-              child: Image.asset(
-                'android/assets/minecraftavatar.png',
-                height: 300,
-                width: 400,
-              ),
+            Image.asset(
+              'android/assets/minecraftavatar.png',
+              height: 300,
+              width: 400,
             ),
             SizedBox(
               height: 80,
