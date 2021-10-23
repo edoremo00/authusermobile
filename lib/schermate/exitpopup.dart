@@ -12,7 +12,7 @@ Future<bool> showExitPopup(context) async {
               //mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 //Icon(Icons.exit_to_app_rounded),
-                Text("Uscire dall'APP?"),
+                Expanded(child: Text("Uscire dall'App?")),
                 Row(
                   children: [
                     Expanded(
@@ -25,18 +25,26 @@ Future<bool> showExitPopup(context) async {
                         },
                         style: ElevatedButton.styleFrom(primary: Colors.green),
                         icon: Icon(Icons.check),
-                        label: Text('Conferma'),
+                        label: Text(
+                          'Conferma',
+                          style: TextStyle(
+                              color: Colors.white, fontWeight: FontWeight.w400),
+                        ),
                       ),
                     ),
                     SizedBox(width: 15),
                     Expanded(
-                      child: ElevatedButton(
+                      child: ElevatedButton.icon(
                         onPressed: () {
                           print('no selected');
                           Navigator.of(context).pop(false);
                         },
-                        child: Text("Annulla",
-                            style: TextStyle(color: Colors.white)),
+                        label: Text(
+                          "Annulla",
+                          style: TextStyle(
+                              color: Colors.white, fontWeight: FontWeight.w400),
+                        ),
+                        icon: Icon(Icons.cancel_sharp),
                         style: ElevatedButton.styleFrom(
                           primary: Colors.red,
                         ),
