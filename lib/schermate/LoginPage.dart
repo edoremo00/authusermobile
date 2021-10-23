@@ -1,4 +1,3 @@
-import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:testlogin/apiclasses/loginusermodel.dart';
 import 'package:testlogin/formvalidation/formvalidationmethods.dart';
@@ -13,11 +12,21 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  late bool buttonloading;
+  //late dynamic _snackbar;
   @override
   void initState() {
     super.initState();
 
     usernameController.addListener(() => setState(() {}));
+    passwordcontroller.addListener(() {
+      setState(() {});
+    });
+    buttonloading = false;
+    /*_snackbar = SnackBar(
+      content: Text('Registrato con successo'),
+      duration: Duration(seconds: 3),
+    );*/
     //questa funzione rimane in ascolto del mio controller username e vede se ci sono cambiamenti
   }
 
@@ -90,8 +99,8 @@ class _LoginPageState extends State<LoginPage> {
                         Padding(
                           padding: EdgeInsets.all(25),
                           child: TextFormField(
-                            //autovalidateMode:
-                            //AutovalidateMode.onUserInteraction,
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
                             autocorrect: true,
                             validator: (username) {
                               if (username!.isEmpty) {
@@ -138,6 +147,9 @@ class _LoginPageState extends State<LoginPage> {
                           padding: EdgeInsets.only(
                               top: 5, left: 20, right: 20, bottom: 30),
                           child: TextFormField(
+                            autocorrect: true,
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
                             /*onEditingComplete: () {  FUNZIONA SOLO SE PREMO TASTO SU TASTIERA SENNO NO 
                               if (validateStructure(passwordcontroller.text) ==
                                   false) {
@@ -168,7 +180,7 @@ class _LoginPageState extends State<LoginPage> {
                               if (password!.isEmpty) {
                                 return 'inserisci una password';
                               } else if (validatepassword(password) == false) {
-                                Flushbar(
+                                /*Flushbar(
                                   icon: Icon(
                                     Icons.dangerous,
                                     color: Colors.black,
@@ -183,8 +195,10 @@ class _LoginPageState extends State<LoginPage> {
                                     Radius.circular(15),
                                   ),
                                   margin: EdgeInsets.all(10),
-                                ).show(context);
-                                return '';
+                                )
+                                    .show(context)
+                                    .then((value) => Flushbar().dismiss());*/
+                                return 'carattere speciale,minimo 8 caratteri,lettera maiuscola';
                               } else if (password.isNotEmpty) {
                                 return null;
                               } else {
@@ -215,33 +229,56 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                         ElevatedButton(
-                          onPressed: () async => {
-                            //log.createuser(log)
-                            if (_formkey.currentState!.validate() == false)
-                              {}
-                            else
-                              {
-                                await Flushbar(
-                                  title: 'Thank you',
-                                  message: 'Processing data...',
-                                  icon: Icon(
-                                    Icons.info,
-                                    color: Colors.black,
-                                  ),
-                                  duration: Duration(seconds: 3),
-                                  backgroundColor: Colors.blueAccent,
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(15),
-                                  ),
-                                  margin: EdgeInsets.all(10),
+                          onPressed: _formkey.currentState?.validate() ?? false
+                              ? () async => {
+                                    if (_formkey.currentState!.validate() ==
+                                        false)
+                                      {}
+                                    else
+                                      {
+                                        setState(() {
+                                          buttonloading = true;
+                                        }),
+                                        await Future.delayed(
+                                          Duration(seconds: 2),
+                                        ).whenComplete(
+                                          () => setState(() {
+                                            buttonloading = false;
+                                          }),
+                                        ),
+                                        //ScaffoldMessenger.of(context)
+                                        //.showSnackBar(_snackbar),
+
+                                        /*await Flushbar(
+                                          title: 'Thank you',
+                                          message: 'Processing data...',
+                                          icon: Icon(
+                                            Icons.info,
+                                            color: Colors.black,
+                                          ),
+                                          duration: Duration(seconds: 3),
+                                          backgroundColor: Colors.blueAccent,
+                                          borderRadius: BorderRadius.all(
+                                            Radius.circular(15),
+                                          ),
+                                          margin: EdgeInsets.all(10),
+                                        ).show(context).whenComplete(
+                                            () => log.createuser(log))*/
+                                      },
+                                  }
+                              : null,
+                          child: buttonloading
+                              ? CircularProgressIndicator(
+                                  color: Colors.white,
+                                  strokeWidth: 3,
                                 )
-                                    .show(context)
-                                    .whenComplete(() => log.createuser(log))
-                              },
-                          },
-                          child: Text('Accedi'),
+                              : Text('Accedi'),
                           style: ElevatedButton.styleFrom(
-                            primary: Color.fromARGB(255, 52, 156, 225),
+                            onSurface: Colors
+                                .blue, //da colore opaco quando bottone è disabled
+                            primary: buttonloading
+                                ? Color.fromARGB(255, 0, 187, 255)
+                                : Color.fromARGB(255, 52, 156, 225),
                             fixedSize: Size(200, 50),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.all(
@@ -257,7 +294,7 @@ class _LoginPageState extends State<LoginPage> {
                         Center(
                           child: GestureDetector(
                             onTap: () => {
-                              Navigator.pushNamed(context, 'Register')
+                              Navigator.pushNamed(context, 'Register'),
                             }, //aggiungere navigate a pagina register
                             child: Text(
                               'Nuovo Utente?',
