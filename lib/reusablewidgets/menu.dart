@@ -11,6 +11,13 @@ class Menu extends StatefulWidget {
 }
 
 class _MenuState extends State<Menu> {
+  late bool selectedmenu;
+  @override
+  void initState() {
+    super.initState();
+    selectedmenu = false;
+  }
+
   @override
   Widget build(BuildContext context) {
     final infoutente = Userdata.getUser();
@@ -36,6 +43,7 @@ class _MenuState extends State<Menu> {
               endIndent: 20,
             ),
             menuitems(
+                //selezionato: true,
                 coloreicona: Colors.black87,
                 icona: Icons.home_outlined,
                 testo: 'Home',
@@ -47,7 +55,11 @@ class _MenuState extends State<Menu> {
                 coloreicona: Colors.black87,
                 icona: Icons.person_outline,
                 testo: 'Gestione Profilo',
+                //selezionato: selectedmenu,
                 funzioneontap: () => {
+                      /*setState(() {
+                        selectedmenu = true;
+                      }),*/
                       Navigator.pop(
                           context), //questo chiude il menu. cosi tornando indietro non lo trovo aperto
                       Navigator.pushNamed(context,
@@ -108,9 +120,12 @@ Widget menuitems(
     IconData? icona,
     Color? coloreicona,
     Color? coloretile,
+    //bool? selezionato,
     VoidCallback? funzioneontap}) {
   return ListTile(
+    //selected: selezionato ?? false,
     minLeadingWidth: 2,
+    selectedTileColor: Colors.yellow,
     //contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
     tileColor: coloretile,
     leading: Icon(
