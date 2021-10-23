@@ -1,4 +1,3 @@
-import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:testlogin/apiclasses/loginusermodel.dart';
 import 'package:testlogin/formvalidation/formvalidationmethods.dart';
@@ -16,12 +15,16 @@ class _RegisterstattefulState extends State<Registerstatteful> {
   final emailcontroller = TextEditingController();
   final passwordcontroller = TextEditingController();
   final confirmpasswordcontroller = TextEditingController();
-
+  late bool registerbuttonloading;
+  late dynamic _snackbar;
   @override
   void initState() {
-    //usernamecontroller.addListener(() => setState(() {}));
-    //emailcontroller.addListener(() => setState(() {}));
     super.initState();
+    registerbuttonloading = false;
+    _snackbar = SnackBar(
+      content: Text('Registrato con successo'),
+      duration: Duration(seconds: 3),
+    );
   }
 
   @override
@@ -149,7 +152,7 @@ class _RegisterstattefulState extends State<Registerstatteful> {
                         } else if (password.contains(' ')) {
                           return 'la password non può contenere spazi';
                         } else if (validatepassword(password) == false) {
-                          Flushbar(
+                          /*Flushbar(
                             icon: Icon(
                               Icons.dangerous,
                               color: Colors.black,
@@ -165,8 +168,8 @@ class _RegisterstattefulState extends State<Registerstatteful> {
                             ),
                             margin: EdgeInsets.all(10),
                             //flushbarPosition: FlushbarPosition.TOP,
-                          ).show(context);
-                          return '';
+                          ).show(context);*/
+                          return 'carattere speciale,minimo 8 caratteri,lettera maiuscola';
                         } else {
                           return null;
                         }
@@ -187,7 +190,7 @@ class _RegisterstattefulState extends State<Registerstatteful> {
                         } else if (confirmpassword.contains(' ')) {
                           return 'la password non può contenere spazi';
                         } else if (validatepassword(confirmpassword) == false) {
-                          Flushbar(
+                          /*Flushbar(
                             icon: Icon(
                               Icons.dangerous,
                               color: Colors.black,
@@ -203,8 +206,8 @@ class _RegisterstattefulState extends State<Registerstatteful> {
                             ),
                             margin: EdgeInsets.all(10),
                             //flushbarPosition: FlushbarPosition.TOP,
-                          ).show(context);
-                          return '';
+                          ).show(context);*/
+                          return 'carattere speciale,minimo 8 caratteri,lettera maiuscola';
                         } else if (passwordmatch(
                                 passwordcontroller.text, confirmpassword) ==
                             false) {
@@ -223,7 +226,18 @@ class _RegisterstattefulState extends State<Registerstatteful> {
                           {}
                         else
                           {
-                            await Flushbar(
+                            setState(() {
+                              registerbuttonloading = true;
+                            }),
+                            await Future.delayed(Duration(seconds: 3))
+                                .whenComplete(
+                              () => setState(() {
+                                registerbuttonloading = false;
+                              }),
+                            ),
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(_snackbar)
+                            /*await Flushbar(
                               title: 'Thank you',
                               message: 'Processing data...',
                               icon: Icon(
@@ -238,10 +252,15 @@ class _RegisterstattefulState extends State<Registerstatteful> {
                               margin: EdgeInsets.all(10),
                             ).show(context).whenComplete(
                                   () => reg.registeruser(reg),
-                                ),
+                                ),*/
                           },
                       },
-                      child: Text('Registrati'),
+                      child: registerbuttonloading
+                          ? CircularProgressIndicator(
+                              color: Colors.white,
+                              strokeWidth: 3,
+                            )
+                          : Text('Registrati'),
                       style: ElevatedButton.styleFrom(
                         fixedSize: Size(160, 60),
                         primary: Color.fromARGB(255, 52, 156, 225),
