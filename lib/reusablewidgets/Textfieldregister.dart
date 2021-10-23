@@ -29,6 +29,7 @@ class _TextfieldregisterState extends State<Textfieldregister> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       validator: widget.validator,
       controller: widget.textEditingController,
       decoration: InputDecoration(
